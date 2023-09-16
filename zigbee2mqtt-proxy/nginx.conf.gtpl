@@ -45,6 +45,12 @@ http {
         root /dev/null;
         server_name _;
 
+        set $parameter_token ""; # declar token is ""(empty str) for original request without args,because $is_args concat any var will be `?`
+
+        if ($is_args) { # if the request has args update token to "&"
+            set $parameter_token "&";
+        }
+
         location / {
             allow   172.30.32.2;
             deny    all;
@@ -52,7 +58,7 @@ http {
             set     $target "{{ .server }}";
             set     $token "{{ .auth_token }}";
 
-            set $args                   $args&token=$token;
+            set $args                   ${args}${parameter_token}token=${token};
             proxy_pass                  $target;
             proxy_http_version          1.1;
             proxy_ignore_client_abort   off;
