@@ -1,5 +1,5 @@
 {
-  "name": "Home Assistant Add-on: Zigbee2MQTT",
+  "name": "Home Assistant Add-on: Zigbee2MQTT (my fork)",
   "url": "https://github.com/pmuir/hassio-zigbee2mqtt",
   "maintainer": "Koen Kanters <koenkanters94@gmail.com>"
 }
