@@ -4,7 +4,6 @@ on:
   push:
     branches:
       - "master"
-
 jobs:
   docker:
     runs-on: ubuntu-latest
@@ -23,7 +22,7 @@ jobs:
       - name: Build and push
         uses: docker/build-push-action@v5
         with:
-          context: .
+          context: "{{defaultContext}}:zigbee2mqtt-proxy"
           platforms: linux/aarch64
           push: true
           tags: pmuir/hassio-zigbee2mqtt:0.2.1
