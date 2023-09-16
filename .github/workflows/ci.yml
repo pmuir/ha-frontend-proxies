@@ -25,4 +25,4 @@ jobs:
           context: "{{defaultContext}}:zigbee2mqtt-proxy"
           platforms: linux/aarch64
           push: true
-          tags: pmuir/hassio-zigbee2mqtt:0.2.1
+          tags: pmuir/hassio-zigbee2mqtt-aarch64:0.2.1
