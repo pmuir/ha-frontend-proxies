@@ -16,7 +16,7 @@ worker_processes 1;
 pcre_jit on;
 
 # Write error log to the add-on log.
-error_log /proc/1/fd/1 error;
+error_log /proc/1/fd/1 info;
 
 # Max num of simultaneous connections by a worker process.
 events {
@@ -24,7 +24,7 @@ events {
 }
 
 http {
-    access_log              on;
+    access_log              /proc/1/fd/1;
     client_max_body_size    4G;
     default_type            application/octet-stream;
     keepalive_timeout       65;
