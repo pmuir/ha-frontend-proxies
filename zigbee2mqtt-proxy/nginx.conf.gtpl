@@ -24,7 +24,7 @@ events {
 }
 
 http {
-    access_log              off;
+    access_log              on;
     client_max_body_size    4G;
     default_type            application/octet-stream;
     keepalive_timeout       65;
