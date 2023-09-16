@@ -59,7 +59,7 @@ http {
             set     $token "{{ .auth_token }}";
 
             set $args                   ${args}${parameter_token}token=${token};
-            proxy_pass                  $target;
+            proxy_pass                  $target$uri$is_args$args;;
             proxy_http_version          1.1;
             proxy_ignore_client_abort   off;
             proxy_read_timeout          86400s;
