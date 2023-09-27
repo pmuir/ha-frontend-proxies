@@ -3,7 +3,7 @@
     "version": "0.2.1",
     "slug": "frigate_proxy",
     "description": "Proxy for externally running Frigate",
-    "url": "https://github.com/pmuir/hassio-zigbee2mqtt/tree/master/zigbee2mqtt-proxy",
+    "url": "https://github.com/pmuir/ha-proxy-frontends/tree/master/frigate",
     "arch": [
       "aarch64",
       "amd64",
@@ -27,12 +27,10 @@
       "8099/tcp": "Frontend tcp-listen port"
     },
     "options": {
-      "server": null,
-      "auth_token": ""
+      "server": null
     },
     "schema": {
-      "server": "url",
-      "auth_token": "str?"
+      "server": "url"
     },
     "image": "pmuir/zigbee2mqtt-proxy-{arch}"
 }
