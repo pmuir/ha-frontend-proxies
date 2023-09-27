@@ -16,7 +16,7 @@ worker_processes 1;
 pcre_jit on;
 
 # Write error log to the add-on log.
-error_log /proc/1/fd/1 info;
+error_log /proc/1/fd/1 error;
 
 # Max num of simultaneous connections by a worker process.
 events {
@@ -24,7 +24,7 @@ events {
 }
 
 http {
-    access_log              /proc/1/fd/1;
+    access_log              off;
     client_max_body_size    4G;
     default_type            application/octet-stream;
     keepalive_timeout       65;
@@ -45,12 +45,6 @@ http {
         root /dev/null;
         server_name _;
 
-        set $parameter_token ""; # declar token is ""(empty str) for original request without args,because $is_args concat any var will be `?`
-
-        if ($is_args) { # if the request has args update token to "&"
-            set $parameter_token "&";
-        }
-
         location / {
             allow   172.30.32.2;
             deny    all;
@@ -58,8 +52,8 @@ http {
             set     $target "{{ .server }}";
             set     $token "{{ .auth_token }}";
 
-            set $args                   ${args}${parameter_token}token=${token};
-            proxy_pass                  $target$uri$is_args$args;;
+            set $args                   $args&token=$token;
+            proxy_pass                  $target;
             proxy_http_version          1.1;
             proxy_ignore_client_abort   off;
             proxy_read_timeout          86400s;
