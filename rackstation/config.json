@@ -2,7 +2,7 @@
     "name": "Rackstation",
     "version": "0.2.1",
     "slug": "rackstation_proxy",
-    "description": "Proxy for externally running Frigate",
+    "description": "Proxy for externally running Rackstation",
     "url": "https://github.com/pmuir/ha-proxy-frontends/tree/master/rackstation",
     "arch": [
       "aarch64",
