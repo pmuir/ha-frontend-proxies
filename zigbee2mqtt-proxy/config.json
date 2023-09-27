@@ -1,8 +1,8 @@
 {
-    "name": "Zigbee2MQTT Proxy",
+    "name": "Frigate",
     "version": "0.2.1",
-    "slug": "zigbee2mqtt_proxy",
-    "description": "Proxy for externally running Zigbee2MQTT",
+    "slug": "frigate_proxy",
+    "description": "Proxy for externally running Frigate",
     "url": "https://github.com/pmuir/hassio-zigbee2mqtt/tree/master/zigbee2mqtt-proxy",
     "arch": [
       "aarch64",
@@ -16,7 +16,7 @@
     "true": true,
     "ingress": true,
     "timeout": 30,
-    "panel_icon": "mdi:zigbee",
+    "panel_icon": "mdi:cctv",
     "map": [
       "config:ro"
     ],
