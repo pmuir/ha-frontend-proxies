@@ -27,11 +27,16 @@ jobs:
           index_of_str: "v"
       - run: |
           echo "Latest version: ${{steps.trim-v.outputs.substring}}"
+      - id: temp
+        run: |
+          echo "tmp=$(mktemp)" >> $GITHUB_OUTPUT 
       - name: Set version in zigbee2mqtt/config.json
         uses: sergeysova/jq-action@v2
         with:
           cmd: |
-            tmp=$(mktemp) jq --arg version "${{steps.trim-v.outputs.substring}}" '.version = $version' zigbee2mqtt/config.json > "$tmp" && mv "$tmp" zigbee2mqtt/config.json
+            jq --arg version "${{steps.trim-v.outputs.substring}}" '.version = $version' zigbee2mqtt/config.json > ${{steps.temp.outputs.tmp}}
+      - run: |
+          mv ${{steps.temp.outputs.tmp}} zigbee2mqtt/config.json
       - uses: stefanzweifel/git-auto-commit-action@v4
         with:
           # Optional. Commit message for the created commit.
