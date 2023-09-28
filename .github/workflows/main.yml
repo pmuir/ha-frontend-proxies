@@ -36,14 +36,14 @@ jobs:
         uses: sergeysova/jq-action@v2
         with:
           cmd: |
-            jq --arg version "${{steps.trim-v.outputs.substring}}" '.version = $version' zigbee2mqtt/config.json > ${{steps.temp.outputs.tmp}}
-      - run: |
-          mv ${{steps.temp.outputs.tmp}} zigbee2mqtt/config.json
+            jq --arg version "${{steps.trim-v.outputs.substring}}" '.version = $version' zigbee2mqtt/config.json
+      # - run: |
+      #     mv ${{steps.temp.outputs.tmp}} zigbee2mqtt/config.json
       - uses: stefanzweifel/git-auto-commit-action@v4
         with:
           # Optional. Commit message for the created commit.
           # Defaults to "Apply automatic changes"
-          commit_message: Update zigbee2mqtt version to ${steps.trim-v.outputs.substring}
+          commit_message: Update zigbee2mqtt version to ${{steps.trim-v.outputs.substring}}
       
           # Optional glob pattern of files which should be added to the commit
           # Defaults to all (.)
