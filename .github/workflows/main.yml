@@ -19,14 +19,14 @@ jobs:
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
       - run: |
-         @echo "Latest tag: ${{fromJson(steps.get-latest-release.outputs.release-info).tag_name}}"
+         echo "Latest tag: ${{fromJson(steps.get-latest-release.outputs.release-info).tag_name}}"
       - uses: bhowell2/github-substring-action@1.0.2
         id: trim-v
         with:
           value: "${{fromJson(steps.get-latest-release.outputs.release-info).tag_name}}"
           index_of_str: "v"
       - run: |
-          @echo "Latest version: ${{steps.trim-v.outputs.substring}}"
+          echo "Latest version: ${{steps.trim-v.outputs.substring}}"
       - name: Set version in zigbee2mqtt/config.json
         uses: sergeysova/jq-action@v2
         with:
