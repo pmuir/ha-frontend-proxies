@@ -11,10 +11,7 @@ jobs:
         run: |
           {
             echo 'JSON_RESPONSE<<EOF'
-            gh api \
-            -H "Accept: application/vnd.github+json" \
-            -H "X-GitHub-Api-Version: 2022-11-28" \
-            /repos/zigbee2mqtt/hassio-zigbee2mqtt/releases/latest
+            gh api -H "Accept: application/vnd.github+json" -H "X-GitHub-Api-Version: 2022-11-28" /repos/zigbee2mqtt/hassio-zigbee2mqtt/releases/latest
             echo EOF
           } >> "$GITHUB_OUTPUT"
           
