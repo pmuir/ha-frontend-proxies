@@ -30,7 +30,8 @@ jobs:
       - name: Set version in zigbee2mqtt/config.json
         uses: sergeysova/jq-action@v2
         with:
-          cmd: tmp=$(mktemp) jq --arg version "${steps.trim-v.outputs.substring}" '.version = $version' zigbee2mqtt/config.json > "$tmp" && mv "$tmp" zigbee2mqtt/config.json
+          cmd: |
+            tmp=$(mktemp) jq --arg version "${{steps.trim-v.outputs.substring}}" '.version = $version' zigbee2mqtt/config.json > "$tmp" && mv "$tmp" zigbee2mqtt/config.json
       - uses: stefanzweifel/git-auto-commit-action@v4
         with:
           # Optional. Commit message for the created commit.
@@ -43,8 +44,4 @@ jobs:
           # - https://git-scm.com/docs/git-add#Documentation/git-add.txt-ltpathspecgt82308203
           # - https://git-scm.com/docs/gitglossary#Documentation/gitglossary.txt-aiddefpathspecapathspec
           file_pattern: 'zigbee2mqtt/config.json'
-      
-          # Optional. Tag name being created in the local repository and 
-          # pushed to remote repository and defined branch.
-          tagging_message: "${{fromJson(steps.get-latest-release.outputs.release-info).tag_name}}"
       
