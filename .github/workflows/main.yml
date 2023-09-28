@@ -33,7 +33,7 @@ jobs:
         uses: mikefarah/yq@master
         with:
           cmd: |
-            yq -i '.version = ${{steps.trim-v.outputs.substring}}' 'zigbee2mqtt/config.json'
+            yq -i '.version = "${{steps.trim-v.outputs.substring}}"' 'zigbee2mqtt/config.json'
       - uses: stefanzweifel/git-auto-commit-action@v4
         with:
           # Optional. Commit message for the created commit.
