@@ -6,6 +6,10 @@ on:
 jobs:
   release:
     runs-on: ubuntu-latest
+    permissions:
+      # Give the default GITHUB_TOKEN write permission to commit and push the
+      # added or changed files to the repository.
+      contents: write
     steps:
       - id: get-latest-release
         name: Get latest release
@@ -15,5 +19,32 @@ jobs:
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
       - run: |
-         echo "${{fromJson(steps.get-latest-release.outputs.release-info).tag_name}}"
+         @echo "Latest tag: ${{fromJson(steps.get-latest-release.outputs.release-info).tag_name}}"
+      - uses: bhowell2/github-substring-action@1.0.2
+        id: trim-v
+        with:
+          value: "${{fromJson(steps.get-latest-release.outputs.release-info).tag_name}}"
+          index_of_str: "v"
+      - run: |
+          @echo "Latest version: ${{steps.trim-v.outputs.substring}}"
+      - name: Set version in zigbee2mqtt/config.json
+        uses: sergeysova/jq-action@v2
+        with:
+          cmd: tmp=$(mktemp) jq --arg version "${steps.trim-v.outputs.substring}" '.version = $version' zigbee2mqtt/config.json > "$tmp" && mv "$tmp" zigbee2mqtt/config.json
+      - uses: stefanzweifel/git-auto-commit-action@v4
+        with:
+          # Optional. Commit message for the created commit.
+          # Defaults to "Apply automatic changes"
+          commit_message: Update zigbee2mqtt version to ${steps.trim-v.outputs.substring}
+      
+          # Optional glob pattern of files which should be added to the commit
+          # Defaults to all (.)
+          # See the `pathspec`-documentation for git
+          # - https://git-scm.com/docs/git-add#Documentation/git-add.txt-ltpathspecgt82308203
+          # - https://git-scm.com/docs/gitglossary#Documentation/gitglossary.txt-aiddefpathspecapathspec
+          file_pattern: 'zigbee2mqtt/config.json'
+      
+          # Optional. Tag name being created in the local repository and 
+          # pushed to remote repository and defined branch.
+          tagging_message: "${{fromJson(steps.get-latest-release.outputs.release-info).tag_name}}"
       
