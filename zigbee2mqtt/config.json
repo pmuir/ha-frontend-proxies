@@ -1,10 +1,10 @@
 {
-  "name": "Zigbee2MQTT",
+  "name": "Zigbee2MQTT (Garage)",
   "version": "1.33.0-1",
-  "slug": "zigbee2mqtt",
+  "slug": "zigbee2mqtt_garage",
   "description": "Use your ZigBee devices without the vendor's bridge or gateway",
   "uart": true,
-  "url": "https://github.com/zigbee2mqtt/hassio-zigbee2mqtt/tree/master/zigbee2mqtt",
+  "url": "https://github.com/pmuir/ha-frontend-proxies/tree/master/zigbee2mqtt",
   "startup": "application",
   "services": [
     "mqtt:need"
@@ -20,7 +20,7 @@
   "init": false,
   "ingress": true,
   "timeout": 30,
-  "panel_icon": "mdi:zigbee",
+  "panel_icon": "mdi:alpha-z-circle-outline",
   "map": [
     "share:rw",
     "config:rw"
