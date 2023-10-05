@@ -1,15 +1,12 @@
-ARG BUILD_ARCH
-# hadolint ignore=DL3006
-FROM ghcr.io/hassio-addons/debian-base/${BUILD_ARCH}:7.1.0
+ARG BUILD_FROM
+FROM $BUILD_FROM
 
 # Set shell
 SHELL ["/bin/bash", "-o", "pipefail", "-c"]
 
 # Setup base
 # hadolint ignore=DL3003
-RUN apt-get -qq update \
-    && apt-get -qq install --no-install-recommends -y nginx \
-    && (apt-get autoremove -y; apt-get autoclean -y)
+RUN apk add --no-cache --update nginx
 
 # Copy root filesystem
 COPY rootfs /
