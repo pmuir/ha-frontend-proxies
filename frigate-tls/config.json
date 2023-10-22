@@ -1,8 +1,8 @@
 {
-  "name": "Frigate HTTPS",
+  "name": "Frigate TLS",
   "version": "0.2.1",
-  "slug": "frigate_https_proxy",
-  "description": "Proxy for Exposing Frigate on ",
+  "slug": "frigate_tls_proxy",
+  "description": "Proxy for Exposing Frigate (UI, go2rtc API, RTSP restream) over TLS",
   "url": "https://github.com/pmuir/ha-proxy-frontends/tree/master/frigate",
   "arch": [
     "aarch64",
