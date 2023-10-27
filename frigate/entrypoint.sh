@@ -1,6 +1,6 @@
 #!/bin/sh
 
-tempio -conf /data/options.json -template /nginx.conf.gtpl -out /etc/nginx/conf.d/proxy.conf
-nginx -T -c  /etc/nginx/conf.d/proxy.conf
+tempio -conf /data/options.json -template /nginx.conf.gtpl -out /tmp/nginx.conf
+nginx -T -c /tmp/nginx.conf
 
-exec /docker-entrypoint.sh
+exec nginx -c /tmp/nginx.conf

@@ -1,31 +1,74 @@
-server {
-    listen 5000 default_server;
 
-    root /dev/null;
-    server_name _;
 
-    location / {
-        allow   172.30.32.2;
-        deny    all;
+# Run nginx in foreground.
+daemon off;
 
-        proxy_pass                  {{ .server }};
-        proxy_set_header Authorization "Basic {{ .basic_auth }}";
-        
-        proxy_http_version          1.1;
-        proxy_ignore_client_abort   off;
-        proxy_read_timeout          86400s;
-        proxy_redirect              off;
-        proxy_max_temp_file_size    0;
+# This is run inside Docker.
+user nginx;
 
-        proxy_set_header Accept-Encoding "";
-        proxy_set_header Connection $connection_upgrade;
-        proxy_set_header Host $http_host;
-        proxy_set_header Upgrade $http_upgrade;
-        proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
-        proxy_set_header X-Forwarded-Proto $scheme;
-        proxy_set_header X-NginX-Proxy true;
-        proxy_set_header X-Real-IP $remote_addr;
+# Pid storage location.
+pid /var/run/nginx.pid;
 
+# Set number of worker processes.
+worker_processes 1;
+
+# Enables the use of JIT for regular expressions to speed-up their processing.
+pcre_jit on;
+
+# Write log to the add-on log.
+error_log  /var/log/nginx/error.log;
+
+# Max num of simultaneous connections by a worker process.
+events {
+    worker_connections 512;
+}
+
+http {
+    access_log  /var/log/nginx/access.log;
+    client_max_body_size    4G;
+    default_type            application/octet-stream;
+    keepalive_timeout       65;
+    sendfile                off;
+    server_tokens           off;
+    tcp_nodelay             on;
+    tcp_nopush              on;
+
+    map $http_upgrade $connection_upgrade {
+        default upgrade;
+        ''      close;
+    }
+    resolver 127.0.0.11 ipv6=off;
+
+    server {
+        listen 5000 default_server;
+
+        root /dev/null;
+        server_name _;
+
+        location / {
+            allow   172.30.32.2;
+            deny    all;
+
+            proxy_pass                  {{ .server }};
+            proxy_set_header Authorization "Basic {{ .basic_auth }}";
+            
+            proxy_http_version          1.1;
+            proxy_ignore_client_abort   off;
+            proxy_read_timeout          86400s;
+            proxy_redirect              off;
+            proxy_max_temp_file_size    0;
+
+            proxy_set_header Accept-Encoding "";
+            proxy_set_header Connection $connection_upgrade;
+            proxy_set_header Host $http_host;
+            proxy_set_header Upgrade $http_upgrade;
+            proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
+            proxy_set_header X-Forwarded-Proto $scheme;
+            proxy_set_header X-NginX-Proxy true;
+            proxy_set_header X-Real-IP $remote_addr;
+
+        }
     }
 }
+
 
