@@ -52,12 +52,10 @@ http {
             proxy_pass                  {{ .server }};
             proxy_set_header Authorization "Basic {{ .basic_auth }}";
             
-            proxy_http_version 1.1;
             proxy_http_version          1.1;
             proxy_ignore_client_abort   off;
             proxy_read_timeout          86400s;
             proxy_redirect              off;
-            proxy_send_timeout          86400s;
             proxy_max_temp_file_size    0;
 
             proxy_set_header Accept-Encoding "";
