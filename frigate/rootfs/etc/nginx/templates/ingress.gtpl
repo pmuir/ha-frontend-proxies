@@ -10,5 +10,6 @@ server {
         proxy_pass http://backend;
         proxy_set_header X-Ingress-Path {{ .entry }};
         include /etc/nginx/includes/proxy_params.conf;
+        proxy_set_header Authorization "Basic {{ .basic_auth }}";
     }
 }
