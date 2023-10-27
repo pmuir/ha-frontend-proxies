@@ -37,3 +37,4 @@ arch:
   - armv7
   - i386
 map: []
+image: pmuir/frigate-proxy-{arch}
