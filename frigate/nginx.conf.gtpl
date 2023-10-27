@@ -16,7 +16,7 @@ worker_processes 1;
 pcre_jit on;
 
 # Write log to the add-on log.
-error_log  /var/log/nginx/error.log;
+error_log  /tmp/error.log debug;
 
 # Max num of simultaneous connections by a worker process.
 events {
@@ -24,7 +24,7 @@ events {
 }
 
 http {
-    access_log  /var/log/nginx/access.log;
+    access_log  /tmp/access.log;
     client_max_body_size    4G;
     default_type            application/octet-stream;
     keepalive_timeout       65;
