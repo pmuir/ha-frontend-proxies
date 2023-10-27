@@ -15,16 +15,12 @@ worker_processes 1;
 # Enables the use of JIT for regular expressions to speed-up their processing.
 pcre_jit on;
 
-# Write log to the add-on log.
-error_log /proc/1/fd/1 error;
-
 # Max num of simultaneous connections by a worker process.
 events {
     worker_connections 512;
 }
 
 http {
-    access_log              /var/log/nginx/access.log combined;
     client_max_body_size    4G;
     default_type            application/octet-stream;
     keepalive_timeout       65;
