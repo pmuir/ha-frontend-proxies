@@ -1,6 +1,6 @@
 FROM nginx
 
 # Copy root filesystem
-ADD proxy.conf.gtpl /
+ADD nginx.conf.gtpl /
 ADD entrypoint.sh /
 ENTRYPOINT ["/entrypoint.sh"]
