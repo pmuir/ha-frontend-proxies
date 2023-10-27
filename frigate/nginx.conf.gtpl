@@ -24,7 +24,7 @@ events {
 }
 
 http {
-    access_log              /var/log/nginx/access.log  main;
+    access_log              /var/log/nginx/access.log combined;
     client_max_body_size    4G;
     default_type            application/octet-stream;
     keepalive_timeout       65;
