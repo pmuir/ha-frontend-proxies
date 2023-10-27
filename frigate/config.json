@@ -33,6 +33,5 @@
     "schema": {
       "server": "str",
       "basic_auth": "str"
-    },
-    "image": "pmuir/zigbee2mqtt-proxy-{arch}"
+    }
 }
