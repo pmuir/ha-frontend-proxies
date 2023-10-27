@@ -24,7 +24,7 @@ events {
 }
 
 http {
-    access_log              /proc/1/fd/1 combined;
+    access_log              /var/log/nginx/access.log  main;
     client_max_body_size    4G;
     default_type            application/octet-stream;
     keepalive_timeout       65;
