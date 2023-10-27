@@ -27,7 +27,7 @@ options:
   server: "frigate.local:5000"
   basic_auth: null
 schema:
-  server: "match(^.+:\\d+$)"
+  server: str
   basic_auth: str
 services: []
 arch:
