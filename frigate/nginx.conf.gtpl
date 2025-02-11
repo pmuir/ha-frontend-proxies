@@ -153,7 +153,7 @@ http {
             deny    all;
 
             proxy_pass                  {{ .server }};
-            proxy_set_header Authorization "Basic {{ .basic_auth }}";
+            # proxy_set_header Authorization "Basic {{ .basic_auth }}";
             
             proxy_http_version          1.1;
             proxy_ignore_client_abort   off;
