@@ -1,4 +1,4 @@
-FROM zigbee2mqtt/zigbee2mqtt-proxy-aarch64
+FROM zigbee2mqtt/zigbee2mqtt-proxy-amd64
 
 # Copy root filesystem
 ADD nginx.conf.gtpl /
