@@ -1,6 +1,6 @@
 {
     "name": "Frigate",
-    "version": "0.2.1",
+    "version": "0.2.2",
     "slug": "frigate_proxy",
     "description": "Proxy for externally running Frigate",
     "url": "https://github.com/pmuir/ha-proxy-frontends/tree/master/frigate",
