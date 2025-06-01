@@ -1,6 +1,6 @@
 {
   "name": "Zigbee2MQTT (Garage)",
-  "version": "2.3.0-1",
+  "version": "2.4.0-1",
   "slug": "zigbee2mqtt_garage",
   "description": "Use your ZigBee devices without the vendor's bridge or gateway",
   "uart": true,
